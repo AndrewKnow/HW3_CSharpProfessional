@@ -15,7 +15,6 @@ namespace WebClient
         }
 
         public string Firstname { get; init; }
-
         public string Lastname { get; init; }
     }
 }

@@ -19,7 +19,7 @@ namespace WebApi
         {
             services.AddControllers();
             services.AddSwaggerGen();
-            services.AddDbContext<CustomerDataContext>(options => options.UseNpgsql("Host = dumbo.db.elephantsql.com; Port = 5432; UserName=lsakasyr; Password=CCU2zFRu7rWDHiGXPeul8i6SxHt1DQ2G; DataBase=lsakasyr;"));
+            services.AddDbContext<CustomerDataContext>(options => options.UseNpgsql("Host = localhost; Port = 5432; UserName=postgres; Password=Dynamo1923; DataBase=HW3_ProCSharp;"));
             services.AddTransient<IEFCustomerRepository, EFCustomerRepository>();
         }
 
