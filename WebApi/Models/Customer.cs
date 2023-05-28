@@ -1,15 +1,18 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApi.Models
 {
     public class Customer
     {
-        public long id { get; init; }
+        //должны соответствовть БД сustomers
+        
+        public long Id { get; init; }
         
         [Required]
-        public string firstname { get; init; }
+        public string Firstname { get; init; }
 
         [Required]
-        public string lastname { get; init; }
+        public string Lastname { get; init; }
     }
 }

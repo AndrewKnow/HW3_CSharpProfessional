@@ -7,6 +7,5 @@ namespace WebApi.Abstractions
     {
         Task <long> CreateCustomerAsync(Customer customer);
         Task <Customer> GetCustomerAsync(long entity);
-        
     }
 }

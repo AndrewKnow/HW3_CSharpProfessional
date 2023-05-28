@@ -6,7 +6,7 @@ namespace WebApi
 {
     public class CustomerDataContext : DbContext
     {
-        public DbSet<Customer> customers { get; set; }
+        public DbSet<Customer> Customers { get; set; } //должен соответствовть БД сustomers
         public CustomerDataContext(DbContextOptions<CustomerDataContext> options) : base(options)
         {
             CreateTables();
@@ -15,10 +15,10 @@ namespace WebApi
         void CreateTables()
         {
             //Если таблица не создана, создаём
-            var sql = @"CREATE TABLE IF NOT EXISTS public.customers 
-                                    (id BIGINT NOT NULL,
-	                                firstname CHARACTER VARYING(255) NOT NULL,
-	                                lastname CHARACTER VARYING(255) NOT NULL);";
+            var sql = @"CREATE TABLE IF NOT EXISTS public.Customers 
+                                    (Id BIGINT NOT NULL,
+	                                Firstname CHARACTER VARYING(255) NOT NULL,
+	                                Lastname CHARACTER VARYING(255) NOT NULL);";
 
             var connectionString = ConnectionString();
             using var connection = new NpgsqlConnection(connectionString);

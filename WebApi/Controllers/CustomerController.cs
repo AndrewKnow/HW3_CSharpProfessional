@@ -15,6 +15,7 @@ namespace WebApi.Controllers
         public CustomerController(IEFCustomerRepository customerRepository)
         {
             _customerRepository = customerRepository;
+
         }
 
         //2. Реализация методов контролера
@@ -28,7 +29,7 @@ namespace WebApi.Controllers
         public async Task<long> CreateCustomer([FromBody] Customer customer)
         {
             await _customerRepository.CreateCustomerAsync(customer);
-            return customer.id;
+            return customer.Id;
         }
     }
 }
