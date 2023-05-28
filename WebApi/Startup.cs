@@ -20,7 +20,7 @@ namespace WebApi
             services.AddControllers();
             services.AddSwaggerGen();
             services.AddDbContext<CustomerDataContext>(options => options.UseNpgsql("Host = dumbo.db.elephantsql.com; Port = 5432; UserName=lsakasyr; Password=CCU2zFRu7rWDHiGXPeul8i6SxHt1DQ2G; DataBase=lsakasyr;"));
-            services.AddTransient<IEFCustomerRepository, CustomerRepository>();
+            services.AddTransient<IEFCustomerRepository, EFCustomerRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

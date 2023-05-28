@@ -28,7 +28,7 @@ namespace WebApi.Controllers
         public async Task<long> CreateCustomer([FromBody] Customer customer)
         {
             await _customerRepository.CreateCustomerAsync(customer);
-            return customer.Id;
+            return customer.id;
         }
     }
 }

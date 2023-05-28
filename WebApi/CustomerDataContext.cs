@@ -1,14 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Npgsql;
-using System.Data.Common;
 using WebApi.Models;
 
 namespace WebApi
 {
     public class CustomerDataContext : DbContext
     {
-        public DbSet<Customer> Customers { get; set; }
-        public CustomerDataContext(DbContextOptions options) : base(options)
+        public DbSet<Customer> customers { get; set; }
+        public CustomerDataContext(DbContextOptions<CustomerDataContext> options) : base(options)
         {
             CreateTables();
         }
