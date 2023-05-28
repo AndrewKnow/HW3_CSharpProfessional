@@ -39,7 +39,7 @@ namespace WebClient
             return customer;
         }
 
-        public static Task<Customer> AddToDB(CustomerCreateRequest randomCustomer)
+        public static Task<int> AddToDB(CustomerCreateRequest randomCustomer)
         {
             Customer customer = new Customer();
 
@@ -57,7 +57,10 @@ namespace WebClient
                     {
                         Customer myDeserializedClass = JsonConvert.DeserializeObject<Customer>(stringRandomCustomer);
                         customer = myDeserializedClass;
-                        return Task.FromResult(customer);
+
+                        var id = response.Content.ReadAsStringAsync().Result;
+
+                        return Task.FromResult(int.Parse(id));
                     }
 
                 }
@@ -66,7 +69,7 @@ namespace WebClient
                     return null;
                 }
             }
-            return Task.FromResult(customer);
+            return null;
         }
     }
 }

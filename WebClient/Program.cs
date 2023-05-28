@@ -37,7 +37,7 @@ namespace WebClient
                             var findCustomer = await CustomerRepository.GetFromDB(IdInt);
                             if(findCustomer != null)
                             {
-                                Console.WriteLine($"Найден: FirstName:{findCustomer.Firstname}, LastName:{findCustomer.Lastname}");
+                                Console.WriteLine($"Найден: Id:{IdInt}, FirstName:{findCustomer.Firstname}, LastName:{findCustomer.Lastname}");
                             }    
                             else
                             {
@@ -52,10 +52,14 @@ namespace WebClient
                     if (intNum == 2)
                     {
                         CustomerCreateRequest randomCustomer = RandomCustomer();
-                        Customer adddCustomer = await CustomerRepository.AddToDB(randomCustomer);
-                        if (adddCustomer != null)
+                        int adddCustomerId = await CustomerRepository.AddToDB(randomCustomer);
+                        var findCustomer = await CustomerRepository.GetFromDB(adddCustomerId);
+
+                        if (findCustomer != null)
                         {
-                            Console.WriteLine($"Создан: FirstName:{adddCustomer.Firstname}, LastName:{adddCustomer.Lastname}");
+                            Console.WriteLine($"Создан: Id:{adddCustomerId}, FirstName:{findCustomer.Firstname}, LastName:{findCustomer.Lastname}");
+                            Console.WriteLine("Проверка на сервере:");
+
                         }
                         else
                         {
