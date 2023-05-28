@@ -15,12 +15,12 @@ namespace WebApi
 
         void CreateTables()
         {
+            //Если таблица не создана, создаём
             var sql = @"CREATE TABLE IF NOT EXISTS public.customers 
                                     (id BIGINT NOT NULL,
 	                                firstname CHARACTER VARYING(255) NOT NULL,
 	                                lastname CHARACTER VARYING(255) NOT NULL);";
 
-            // Создание базы "авито" (как я себе представил)
             var connectionString = ConnectionString();
             using var connection = new NpgsqlConnection(connectionString);
             connection.Open();

@@ -19,13 +19,13 @@ namespace WebApi.Controllers
 
         //2. Реализация методов контролера
         [HttpGet("{id:long}")]   
-        public async Task<Customer> GetCustomerAsync([FromRoute] long id)
+        public async Task<Customer> GetCustomer([FromRoute] long id)
         {
             return await _customerRepository.GetCustomerAsync(id);
         }
 
         [HttpPost("")]   
-        public async Task<long> CreateCustomerAsync([FromBody] Customer customer)
+        public async Task<long> CreateCustomer([FromBody] Customer customer)
         {
             await _customerRepository.CreateCustomerAsync(customer);
             return customer.Id;

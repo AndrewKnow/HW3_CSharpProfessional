@@ -16,8 +16,8 @@ namespace WebApi.Repository
 
         public async Task<long> CreateCustomerAsync(Customer customer)
         {
-            await _dataContext.AddAsync(customer);
-            await _dataContext.SaveChangesAsync();
+            await _dataContext.Customers!.AddAsync(customer);
+            _dataContext.SaveChangesAsync().GetAwaiter().GetResult(); ;
             return customer.Id;
         }
 
