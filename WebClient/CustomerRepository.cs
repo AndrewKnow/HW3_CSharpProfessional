@@ -24,11 +24,17 @@ namespace WebClient
 
             using (restClient = new RestClient(_url + id))
             {
-                var response = await restClient.ExecuteAsync<Customer>(new RestRequest());
+                try
+                {
+                    var response = await restClient.ExecuteAsync<Customer>(new RestRequest());
+                    Customer myDeserializedClass = JsonConvert.DeserializeObject<Customer>(response.Content);
+                    customer = myDeserializedClass;
+                }
+                catch
+                {
+                    return null;
+                }
 
-                Customer myDeserializedClass = JsonConvert.DeserializeObject<Customer>(response.Content);
-
-                customer = myDeserializedClass;
             }
             return customer;
         }
@@ -44,12 +50,20 @@ namespace WebClient
 
             using (HttpClient client = new HttpClient())
             {
-                using var response = client.PostAsync(_url, content).Result;
-                if (response.StatusCode == HttpStatusCode.OK)
+                try
                 {
-                    Customer myDeserializedClass = JsonConvert.DeserializeObject<Customer>(stringRandomCustomer);
-                    customer = myDeserializedClass;
-                    return Task.FromResult(customer);
+                    using var response = client.PostAsync(_url, content).Result;
+                    if (response.StatusCode == HttpStatusCode.OK)
+                    {
+                        Customer myDeserializedClass = JsonConvert.DeserializeObject<Customer>(stringRandomCustomer);
+                        customer = myDeserializedClass;
+                        return Task.FromResult(customer);
+                    }
+
+                }
+                catch
+                {
+                    return null;
                 }
             }
             return Task.FromResult(customer);

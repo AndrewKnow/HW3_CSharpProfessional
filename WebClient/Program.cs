@@ -51,11 +51,16 @@ namespace WebClient
                     }
                     if (intNum == 2)
                     {
-
                         CustomerCreateRequest randomCustomer = RandomCustomer();
                         Customer adddCustomer = await CustomerRepository.AddToDB(randomCustomer);
-
-                        Console.WriteLine($"Создан: FirstName:{adddCustomer.Firstname}, LastName:{adddCustomer.Lastname}");
+                        if (adddCustomer != null)
+                        {
+                            Console.WriteLine($"Создан: FirstName:{adddCustomer.Firstname}, LastName:{adddCustomer.Lastname}");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Ошибка. Запись не создана");
+                        }
                     }
                 }
             }
