@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,14 +28,21 @@ namespace WebClient
 
                     if (intNum == 1)
                     {
-                        Console.WriteLine("Укажите Id");
+                        Console.WriteLine("Укажите Id:");
                         var IdVar = Console.ReadLine();
                         bool IntParseID = int.TryParse((string)IdVar, out _);
                         if (IntParseID)
                         {
                             int IdInt = int.Parse(IdVar);
-                            var findCustomer = await  GetCustomer.GetFromDB(IdInt);
-                            Console.WriteLine($"Найден: Id:{findCustomer.Id}, FirstName:{findCustomer.Firstname}, LastName:{findCustomer.Lastname}");
+                            var findCustomer = await CustomerRepository.GetFromDB(IdInt);
+                            if(findCustomer != null)
+                            {
+                                Console.WriteLine($"Найден: FirstName:{findCustomer.Firstname}, LastName:{findCustomer.Lastname}");
+                            }    
+                            else
+                            {
+                                Console.WriteLine($"{IdInt} не существует");
+                            }
                         }
                         else
                         {
@@ -42,7 +51,11 @@ namespace WebClient
                     }
                     if (intNum == 2)
                     {
-           
+
+                        CustomerCreateRequest randomCustomer = RandomCustomer();
+                        Customer adddCustomer = await CustomerRepository.AddToDB(randomCustomer);
+
+                        Console.WriteLine($"Создан: FirstName:{adddCustomer.Firstname}, LastName:{adddCustomer.Lastname}");
                     }
                 }
             }
@@ -56,8 +69,6 @@ namespace WebClient
         /// <returns>генерирует firstName и lastName </returns>
         private static CustomerCreateRequest RandomCustomer()
         {
-            var rndCustomer = new Customer();
-
             Random rnd = new Random();
 
             int rndNameLenth = rnd.Next(5, 10);

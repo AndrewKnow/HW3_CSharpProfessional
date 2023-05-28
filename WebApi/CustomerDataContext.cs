@@ -8,7 +8,7 @@ namespace WebApi
 {
     public class CustomerDataContext : DbContext
     {
-        public DbSet<Customer> Customers { get; set; } //должен соответствовть БД сustomers
+        public DbSet<Customer> Customers { get; set; } 
         public CustomerDataContext(DbContextOptions<CustomerDataContext> options) : base(options)
         {
             CreateTables();
@@ -20,8 +20,6 @@ namespace WebApi
             if (canCreate)
             {
                 //Если таблица не создана, создаём
-
-
                 var sql = @"
                         CREATE TABLE customers 
                         (
@@ -30,33 +28,12 @@ namespace WebApi
 	                    lastname        CHARACTER VARYING(255)      NOT NULL
                         );";
 
-                //var sql = @"
-                //        CREATE SEQUENCE customers_id_seq;
-
-                //        CREATE TABLE customers 
-                //        (
-                //        id              BIGINT                      NOT NULL   DEFAULT NEXTVAL('customers_id_seq'),
-                //     firstname       CHARACTER VARYING(255)      NOT NULL,
-                //     lastname        CHARACTER VARYING(255)      NOT NULL,
-                //        CONSTRAINT customers_id_seq PRIMARY KEY (id)
-                //        );";
-
                 var connectionString = ConnectionString();
                 using var connection = new NpgsqlConnection(connectionString);
                 connection.Open();
 
                 using var cmd = new NpgsqlCommand(sql, connection);
                 cmd.ExecuteNonQuery();
-
-                //CREATE TABLE IF NOT EXISTS public.Customers 
-                //var sql = @"
-                //        CREATE SEQUENCE customers_id2_seq;
-                //        CREATE TABLE public.customers 
-                //        (
-                //        id BIGINT NOT NULL DEFAULT NEXTVAL('customers_id2_seq'),
-	               //     firstname CHARACTER VARYING(255) NOT NULL,
-	               //     lastname CHARACTER VARYING(255) NOT NULL,
-                //        CONSTRAINT customers_id2_seq PRIMARY KEY (id));";
             }
         }
 

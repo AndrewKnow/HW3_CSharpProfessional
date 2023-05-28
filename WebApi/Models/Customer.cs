@@ -5,8 +5,6 @@ namespace WebApi.Models
 {
     public class Customer
     {
-        //должны соответствовть БД сustomers
-        
         public long Id { get; init; }
         
         [Required]
