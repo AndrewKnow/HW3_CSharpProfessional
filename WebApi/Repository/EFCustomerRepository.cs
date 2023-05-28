@@ -8,7 +8,6 @@ namespace WebApi.Repository
 {
     public class EFCustomerRepository : IEFCustomerRepository
     {
-
         private readonly CustomerDataContext _dataContext;
         public EFCustomerRepository(CustomerDataContext customerDataContext)
         {
@@ -17,14 +16,6 @@ namespace WebApi.Repository
 
         public async Task<long> CreateCustomerAsync(Customer customer)
         {
-            //var o = new
-            //{
-            //    id = customer.Id,
-            //    firstname = customer.Firstname,
-            //    lastname = customer.Lastname,
- 
-            //};
-
             await _dataContext.Customers!.AddAsync(customer);
             await _dataContext.SaveChangesAsync();
             return customer.Id;
@@ -35,7 +26,5 @@ namespace WebApi.Repository
             var entity = await _dataContext.Set<Customer>().FirstOrDefaultAsync(x => x.Id == id);
             return entity;
         }
-
-
     }
 }

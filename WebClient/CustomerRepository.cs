@@ -1,12 +1,8 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,9 +10,7 @@ namespace WebClient
 {
     public static class CustomerRepository
     {
-
         private static string _url = "https://localhost:5001/customers/";
-
         public static async Task<Customer> GetFromDB(int id)
         {
             Customer customer = new Customer();
@@ -40,8 +34,7 @@ namespace WebClient
         }
 
         public static Task<int> AddToDB(CustomerCreateRequest randomCustomer)
-        {
-           
+        {     
             var serializerSettings = new JsonSerializerSettings();
             serializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             string stringRandomCustomer = JsonConvert.SerializeObject(randomCustomer, serializerSettings);

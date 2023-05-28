@@ -6,8 +6,6 @@ using Microsoft.Extensions.Hosting;
 using WebApi.Abstractions;
 using WebApi.Repository;
 
-using System;
-
 namespace WebApi
 {
     public class Startup

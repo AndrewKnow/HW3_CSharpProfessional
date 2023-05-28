@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Npgsql;
-using System.Data.Common;
-using System;
 using WebApi.Models;
 
 namespace WebApi
@@ -71,7 +69,6 @@ namespace WebApi
                 return true;
             }
         }
-
     }
 }
 
