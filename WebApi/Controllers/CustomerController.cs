@@ -11,8 +11,8 @@ namespace WebApi.Controllers
     {
         // Необходимо для обращения из интернета
         //1.Собираем кнструктор
-        private readonly IEFRepository<Customer> _customerRepository;
-        public CustomerController(IEFRepository<Customer> customerRepository)
+        private readonly IEFCustomerRepository _customerRepository;
+        public CustomerController(IEFCustomerRepository customerRepository)
         {
             _customerRepository = customerRepository;
         }

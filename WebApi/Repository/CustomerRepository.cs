@@ -5,19 +5,20 @@ using WebApi.Models;
 
 namespace WebApi.Repository
 {
-    public class EFRepository : IEFRepository<Customer>
+    public class CustomerRepository : IEFCustomerRepository
     {
 
-        private readonly DbContext _dataContext;
-        public EFRepository(DbContext dataContext)
+        private readonly CustomerDataContext _dataContext;
+        public CustomerRepository(CustomerDataContext customerDataContext)
         {
-            _dataContext = dataContext;
+            _dataContext = customerDataContext;
         }
 
-        public async Task CreateCustomerAsync(Customer customer)
+        public async Task<long> CreateCustomerAsync(Customer customer)
         {
             await _dataContext.AddAsync(customer);
             await _dataContext.SaveChangesAsync();
+            return customer.Id;
         }
 
         public async Task<Customer> GetCustomerAsync(long id)

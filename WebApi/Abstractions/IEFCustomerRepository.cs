@@ -3,9 +3,9 @@ using WebApi.Models;
 
 namespace WebApi.Abstractions
 {
-    public interface IEFRepository<Customer>
+    public interface IEFCustomerRepository
     {
-        Task CreateCustomerAsync(Customer customer);
+        Task <long> CreateCustomerAsync(Customer customer);
         Task <Customer> GetCustomerAsync(long entity);
         
     }
