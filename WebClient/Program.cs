@@ -37,11 +37,11 @@ namespace WebClient
                             var findCustomer = await CustomerRepository.GetFromDB(IdInt);
                             if(findCustomer != null)
                             {
-                                Console.WriteLine($"Найден: Id:{IdInt}, FirstName:{findCustomer.Firstname}, LastName:{findCustomer.Lastname}");
+                                Console.WriteLine($"Код 200. Найден: Id:{IdInt}, FirstName:{findCustomer.Firstname}, LastName:{findCustomer.Lastname}");
                             }    
                             else
                             {
-                                Console.WriteLine($"{IdInt} не существует");
+                                Console.WriteLine($"Код 404. {IdInt} не существует");
                             }
                         }
                         else
@@ -57,9 +57,7 @@ namespace WebClient
 
                         if (findCustomer != null)
                         {
-                            Console.WriteLine($"Создан: Id:{adddCustomerId}, FirstName:{findCustomer.Firstname}, LastName:{findCustomer.Lastname}");
-                            Console.WriteLine("Проверка на сервере:");
-
+                            Console.WriteLine($"Код 200. Создан: Id:{adddCustomerId}, FirstName:{findCustomer.Firstname}, LastName:{findCustomer.Lastname}");
                         }
                         else
                         {

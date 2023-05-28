@@ -29,20 +29,19 @@ namespace WebClient
                     var response = await restClient.ExecuteAsync<Customer>(new RestRequest());
                     Customer myDeserializedClass = JsonConvert.DeserializeObject<Customer>(response.Content);
                     customer = myDeserializedClass;
+                    return customer;
                 }
                 catch
                 {
                     return null;
                 }
 
-            }
-            return customer;
+            } 
         }
 
         public static Task<int> AddToDB(CustomerCreateRequest randomCustomer)
         {
-            Customer customer = new Customer();
-
+           
             var serializerSettings = new JsonSerializerSettings();
             serializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             string stringRandomCustomer = JsonConvert.SerializeObject(randomCustomer, serializerSettings);
@@ -56,11 +55,16 @@ namespace WebClient
                     if (response.StatusCode == HttpStatusCode.OK)
                     {
                         Customer myDeserializedClass = JsonConvert.DeserializeObject<Customer>(stringRandomCustomer);
+                        Customer customer = new Customer();
                         customer = myDeserializedClass;
 
                         var id = response.Content.ReadAsStringAsync().Result;
 
                         return Task.FromResult(int.Parse(id));
+                    }
+                    else
+                    {
+
                     }
 
                 }
